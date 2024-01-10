@@ -45,7 +45,7 @@ const HomeScreen = ({navigation}) => {
             </View>
             <Text style={styles.pText}>Wil je je een avond organiseren met drank? Kijk dan zeker door ons assortiment met alcohol. Voor iedereen is er iets. 
             {'\n'}{'\n'}Vergeet niet ons vakmanschap drink je met verstand. </Text>
-            <TouchableOpacity style={styles.button} onPress={goToDrinks}>
+            <TouchableOpacity style={styles.button} onPress={goToAbout}>
               <Text style={styles.buttonText}>Voor mij alcohol</Text>
             </TouchableOpacity>
           </View>
@@ -146,6 +146,7 @@ const styles = StyleSheet.create({
 
   pText: {
     color: "white",
+    fontSize: 16,
     paddingLeft: 24,
     paddingRight: 24,
     paddingBottom: 16,
