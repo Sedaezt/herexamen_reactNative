@@ -21,11 +21,11 @@ export default function TabLayout() {
           paddingBottom: 10, 
         },
         tabBarLabelStyle: {
-          fontSize: 13, // Fontgrootte van de labels
+          fontSize: 13,
         },
       }}
     >
-      {/* Home Tab */}
+      {/* Home pagina */}
       <Tabs.Screen
         name="index"
         options={{
@@ -39,7 +39,7 @@ export default function TabLayout() {
         }}
       />
 
-      {/* Categories Tab with Tag Icon */}
+      {/* Categorie pagina */}
       <Tabs.Screen
         name="categories"
         options={{
