@@ -1,9 +1,10 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { Tabs } from "expo-router";
+import React from "react";
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { TabBarIcon } from "@/components/navigation/TabBarIcon"; 
+import { Colors } from "@/constants/Colors";
+import { useColorScheme } from "@/hooks/useColorScheme";
+import { Ionicons } from "@expo/vector-icons"; 
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -11,38 +12,72 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         headerShown: false,
-      }}>
+        tabBarStyle: {
+          backgroundColor: '#ffffff',
+          height: 70, 
+          borderTopWidth: 0, 
+          paddingBottom: 10, 
+        },
+        tabBarLabelStyle: {
+          fontSize: 13, // Fontgrootte van de labels
+        },
+      }}
+    >
       {/* Home Tab */}
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: "Home",
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+            <TabBarIcon
+              name={focused ? "home" : "home-outline"}
+              color={color}
+            />
           ),
         }}
       />
-      
-      {/* Explore Tab */}
+
+      {/* Categories Tab with Tag Icon */}
       <Tabs.Screen
-        name="explore"
+        name="categories"
         options={{
-          title: 'Explore',
+          title: "Categories",
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'star' : 'star-outline'} color={color} />
+            <Ionicons
+              name={focused ? "pricetag" : "pricetag-outline"}
+              size={24}
+              color={color}
+            />
           ),
         }}
       />
-      
-      {/* New Profile Tab */}
+
+      {/* Favoriet Tab */}
       <Tabs.Screen
-        name="profile"
+        name="favoriet"
         options={{
-          title: 'Profile',
+          title: "Favoriet",
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'person' : 'person-outline'} color={color} />
+            <TabBarIcon
+              name={focused ? "star" : "star-outline"}
+              color={color}
+            />
+          ),
+        }}
+      />
+
+      {/* Settings Tab */}
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: "Settings",
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon
+              name={focused ? "settings" : "settings-outline"}
+              color={color}
+            />
           ),
         }}
       />
