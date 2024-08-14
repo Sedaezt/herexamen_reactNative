@@ -1,37 +1,18 @@
-// apiService.js
-import axios from 'axios';
+const BASE_URL = 'http://sport.ddev.site/api/accesoires'; // Vervang met je correcte API URL
 
-// Maak een nieuwe Axios instantie met je API basis URL
-const apiClient = axios.create({
-  baseURL: 'http://sport.ddev.site/api/accesoires', // Vervang met je Craft CMS API basis URL
-  timeout: 1000,
-  headers: { 'Content-Type': 'application/json' },
-});
-
-// Voorbeeld van een GET-aanroep om entries op te halen
-export const getEntries = async () => {
+export const getAccesoires = async () => {
   try {
-    const response = await apiClient.get('/entries', {
-      params: {
-        section: 'accesoires', // Pas dit aan naar je sectie of andere queryparameters
-      },
-    });
-    return response.data;
+    const response = await fetch(BASE_URL);
+
+    // Controleer of de response status goed is
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data; // Dit is de JSON data van je API
   } catch (error) {
-    console.error('Error fetching entries:', error);
-    throw error;
+    console.error('Error fetching accesoires:', error);
+    throw error; // Gooi de fout opnieuw om deze later af te handelen
   }
 };
-
-// Voorbeeld van een POST-aanroep om een nieuwe entry toe te voegen
-export const createEntry = async (entryData) => {
-  try {
-    const response = await apiClient.post('/entries', entryData);
-    return response.data;
-  } catch (error) {
-    console.error('Error creating entry:', error);
-    throw error;
-  }
-};
-
-// Voeg andere API-aanroepen toe zoals nodig
