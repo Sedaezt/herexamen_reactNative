@@ -18,19 +18,21 @@ const CategoryCard: React.FC<{ category: Category }> = ({ category }) => (
 const styles = StyleSheet.create({
   card: {
     width: '100%',
-    maxWidth: 300, // Zorgt ervoor dat de kaart niet breder is dan 300px
-    marginVertical: 10,
+    minWidth: 250,
+    marginVertical: 0,
     borderRadius: 10,
     overflow: 'hidden',
     backgroundColor: '#fff',
     elevation: 3,
     alignSelf: 'center',
     alignItems: 'center',
+    marginTop: 0,
   },
   image: {
-    width: '100%', // Breedte van de afbeelding vult de breedte van de kaart
-    height: 250,
+    width: '100%',
+    height: 150,
     resizeMode: 'cover',
+    marginTop: 20, // Voegt 30px ruimte toe boven de afbeelding
   },
   name: {
     fontSize: 18,

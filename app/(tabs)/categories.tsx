@@ -1,11 +1,15 @@
-// Categories.tsx
 import React from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
-import Header from '@/app/header'; // Zorg ervoor dat je pad klopt
-import CategoryCard from '@/app/categorie/CategoryCard'; // Zorg ervoor dat je pad klopt
+import { View, Text, StyleSheet, FlatList } from 'react-native';
+import Header from '@/app/header';
+import CategoryCard from '@/app/categorie/CategoryCard';
 
-// Categorieën kunnen eenvoudig worden gedefinieerd als een array van objecten.
-const categories = [
+type Category = {
+  id: string;
+  name: string;
+  image: any;
+};
+
+const categories: Category[] = [
   {
     id: '1',
     name: 'Sport',
@@ -14,20 +18,23 @@ const categories = [
   {
     id: '2',
     name: 'Accessoires',
-    image: require('@/assets/images/home/hockeystick.jpg'),
+    image: require('@/assets/images/home/ballerina.jpg'),
   },
 ];
 
 const Categories: React.FC = () => {
   return (
     <View style={styles.container}>
-      <Header title="Categories" />
-      <FlatList
-        data={categories}
-        renderItem={({ item }) => <CategoryCard category={item} />}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={styles.listContainer}
-      />
+      <Header title="Fit&Active" />
+      <View style={styles.content}>
+        <Text style={styles.categoryTitle}>Categories</Text>
+        <FlatList
+          data={categories}
+          renderItem={({ item }) => <CategoryCard category={item} />}
+          keyExtractor={(item) => item.id}
+          contentContainerStyle={styles.listContainer}
+        />
+      </View>
     </View>
   );
 };
@@ -35,9 +42,19 @@ const Categories: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 50,
     backgroundColor: '#fdfdfd',
-    alignItems: 'center',
+    marginTop: 35, // Ruimte voor de header
+  },
+  content: {
+    flex: 1,
+    padding: 20,
+  },
+  categoryTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#062B65',
+    textAlign: 'center',
+    marginVertical: 20,
   },
   listContainer: {
     paddingBottom: 20,
