@@ -1,4 +1,4 @@
-// favo screen
+// favorite screen 
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
