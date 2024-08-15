@@ -1,6 +1,6 @@
 // App.js
-import React, { useState, useEffect } from 'react';
-import Navigation from './Navigation';
+import React, { useState, useEffect } from "react";
+import Navigation from "./Navigation";
 
 const App = () => {
   return <Navigation />;

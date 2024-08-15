@@ -1,156 +1,129 @@
-// HomeScreen.js (en andere schermen)
 import React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
-import Footer from '../components/Footer'; // Import the Footer component
 
-const HomeScreen = ({navigation}) => {
-  const goToDrinks = () => {
-    // Navigate to the "Drinks" screen
-    navigation.navigate('Drinks');
+const products = [
+  {
+    id: 1,
+    name: "Hockeystick for experts",
+    price: "€ 299,99",
+    brand: "DITA hockeystick",
+    image: require('../assets/Frontpage/hockeystick.jpg'),
+  },
+  {
+    id: 2,
+    name: "Hockeystick for adults",
+    price: "€ 200",
+    brand: "DITA",
+    image: require('../assets/Frontpage/ballerina.jpg'),
+  },
+];
+
+const HomeScreen = ({ navigation }) => {
+  const goToSport = () => {
+    navigation.navigate('Sport');
   };
 
-  const goToAbout = () => {
-    // Navigate to the "About" screen
-    navigation.navigate('About');
+  const goToHockey = (product) => {
+    navigation.navigate('Hockey', { product });
   };
 
-    return (
-        <ScrollView style={styles.container}>
-          <View style={styles.holder}>
-            <Text style={styles.welcomeText}>Welcome to  </Text>
-            <Text style={styles.goodDrinksText}> The Very Good Drinks.</Text>
-          </View>
-            {/* Add two images side by side */}
-          <View style={styles.imageContainer}>
-            <Image source={require('../assets/Frontpage/Drinking_orange.jpg')} style={styles.image} />
-            <Image source={require('../assets/Frontpage/Bottle_Jack.jpg')} style={styles.image} />
-          </View>
-          <View style={styles.holders}>
-            <View style={styles.holder2}>
-              <Text style={styles.welcomeText}>Ons  </Text>
-              <Text style={styles.goodDrinksText}> Assortiment</Text>
-            </View>
-            <Text style={styles.pText}> Heb jij een feest of denk je een kleine avond te organiseren. Twijfel dan zeker niet om ons assortiment te bekijken. We beloven je de beste kwaliteit aan dranken en de meeste keuze. Zowel met als zonder alcohol</Text>
-            <TouchableOpacity style={styles.button} onPress={goToDrinks}>
-              <Text style={styles.buttonText}>Go to Drinks</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.imageContainer2}>
-            <Image source={require('../assets/Frontpage/apperitief.png')} style={styles.fullImage} />
-          </View>
-          <View style={styles.holders}>
-            <View style={styles.holder2}>
-              <Text style={styles.welcomeText}>Enkel  </Text>
-              <Text style={styles.goodDrinksText}> Alcohol</Text>
-            </View>
-            <Text style={styles.pText}>Wil je je een avond organiseren met drank? Kijk dan zeker door ons assortiment met alcohol. Voor iedereen is er iets. 
-            {'\n'}{'\n'}Vergeet niet ons vakmanschap drink je met verstand. </Text>
-            <TouchableOpacity style={styles.button} onPress={goToAbout}>
-              <Text style={styles.buttonText}>Voor mij alcohol</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.imageContainer2}>
-            <Image source={require('../assets/Frontpage/assortiment.jpg')} style={styles.fullImage} />
-          </View>
-          <View style={styles.holders}>
-            <View style={styles.holder2}>
-              <Text style={styles.welcomeText}> What we are all</Text>
-              <Text style={styles.goodDrinksText}> About</Text>
-            </View>
-            <Text style={styles.pText}>Eerst en vooral wij zijn de nummer 1 website in drankverkoop. Maar we zijn meer dan dat. Ondek dit allemaal.</Text>
-            <TouchableOpacity style={styles.button} onPress={goToDrinks}>
-              <Text style={styles.buttonText}>Get to know us</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.imageContainer2}>
-            <Image source={require('../assets/Frontpage/About_frontpage.jpg')} style={styles.fullImage} />
-          </View>
-          
-          {/* Use the Footer component with the navigation prop */}
-          <Footer navigation={navigation} />
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.holder}>
+        <Text style={styles.welcomeText}>Hi there!</Text>
+        <Text style={styles.goodSportsText}>Welcome to Fit & active</Text>
+      </View>
+      <View style={styles.imageContainer}>
+        <Image source={require('../assets/Frontpage/korting.jpg')} style={styles.image} />
+      </View>
+      <View style={styles.holders}>
+        <Text style={styles.goodSportsText}>-40% on all accessories</Text>
+        <TouchableOpacity style={styles.button} onPress={goToSport}>
+          <Text style={styles.buttonText}>See sport items</Text>
+        </TouchableOpacity>
+      </View>
 
-        </ScrollView>
-    );
+      {/* Product List */}
+      {products.map((product) => (
+        <TouchableOpacity key={product.id} onPress={() => goToHockey(product)} style={styles.productContainer}>
+          <Image source={product.image} style={styles.productImage} />
+          <Text style={styles.productName}>{product.name}</Text>
+          <Text style={styles.productPrice}>{product.price}</Text>
+          <Text style={styles.productBrand}>{product.brand}</Text>
+        </TouchableOpacity>
+      ))}
+    </ScrollView>
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ECC1BD', // Rood
-    marginHorizontal: 0,
-    flexDirection: 'column',
-    marginBottom: 0,
-    width: "100%",
-    
+    backgroundColor: '#FDFDFD',
+  },
+  holder: {
+    marginVertical: 56,
+    marginLeft: 30,
   },
   holders: {
-    flex: 1,
-    alignItems: "center",
-    marginVertical: 16, // Add margin between images and other content
-  },
-
-  holder: {
-    flex: 1,
-    alignItems: "center",
-    marginVertical: 56, // Add margin between images and other content
-  },
-
-  holder2: {
-    flex: 1,
     alignItems: "center",
     marginVertical: 16,
   },
-
   button: {
-    backgroundColor: '#FF0000', // Red color
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    marginTop: 16,
+    backgroundColor: '#062B65',
+    paddingVertical: 12,
+    paddingHorizontal: 120,
+    marginTop: 20,
     borderRadius: 12,
-    marginTop: 10, // Add space between the button and other content
     alignItems: 'center',
   },
-
   buttonText: {
     color: '#FFFFFF',
     fontSize: 16,
   },
-
   welcomeText: {
-    color: '#FFFFFF', // Tekstkleur (wit)
-    fontSize: 24, // Optioneel: pas de grootte van de tekst aan
+    color: '#062B65',
+    fontSize: 24,
   },
-  goodDrinksText: {
-    color: '#E52529', // Tekstkleur (wit)
-    fontSize: 24, // Optioneel: pas de grootte van de tekst aan
-    fontWeight: 'bold', // Optioneel: pas de dikte van de tekst aan
+  goodSportsText:{
+    color: '#062B65',
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginTop: 12,
   },
   imageContainer: {
-    flexDirection: 'row', // Arrange children horizontally
-    marginTop: 0, // Adjust the spacing as needed
+    justifyContent: 'center',
+    marginLeft: 20,
   },
   image: {
-    flex: 1, // Take up equal space in the row
-    width: null, // Set the width of your images
-    height: null, // Set the height of your images
-    aspectRatio: 1, // Maintain the aspect ratio of the images
-    marginHorizontal: 0, // Adjust the spacing between images
+    width: 350,
+    height: 150,
+    borderRadius: 16,
+    marginTop: -30,
   },
-  imageContainer2: {
-    marginTop: 32,
+  productContainer: {
+    marginVertical: 20,
+    alignItems: 'center',
   },
-  fullImage: {
-    width: '100%', // Take up 100% width
-    height: 230,   // Fixed height
+  productImage: {
+    width: 150,
+    height: 150,
   },
-
-  pText: {
-    color: "white",
+  productName: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#062B65',
+    marginTop: 10,
+  },
+  productPrice: {
     fontSize: 16,
-    paddingLeft: 24,
-    paddingRight: 24,
-    paddingBottom: 16,
-    textAlign: "center",
+    color: '#062B65',
+    marginTop: 5,
+  },
+  productBrand: {
+    fontSize: 14,
+    color: '#062B65',
+    marginTop: 5,
   },
 });
 

@@ -1,15 +1,39 @@
-// Navigation.js
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './screens/Homescreen.js';
-import DrinksScreen from './screens/DrinksScreen.js';
-import AboutScreen from './screens/AboutScreen';
-import Icon from 'react-native-vector-icons/Ionicons'; // You can choose a different set of icons
+import SportScreen from './screens/SportScreen.js';
+import FavoritesScreen from './screens/FavoritesScreen.js';
+import SettingsScreen from './screens/SettingsScreen.js';
+import Hockey from './screens/details/Hockey.js'; // Zorg dat dit pad klopt
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const StackNavigator = ({ route }) => (
+  <Stack.Navigator
+    screenOptions={{
+      headerStyle: { backgroundColor: '#062B65' },
+      headerTitleStyle: { color: 'white' },
+      headerTitleAlign: 'center',
+      headerTitle: 'Fit & Active',
+      headerBackTitleVisible: false,
+    }}
+  >
+    <Stack.Screen 
+      name="Screen" 
+      component={route.params.component} 
+      options={{ headerShown: true }}
+    />
+    <Stack.Screen
+      name="Hockey"
+      component={Hockey}
+      options={{ title: 'Hockey Details' }}
+    />
+  </Stack.Navigator>
+);
 
 const Navigation = () => {
   return (
@@ -22,31 +46,44 @@ const Navigation = () => {
 
             if (route.name === 'Home') {
               iconName = focused ? 'home' : 'home-outline';
-            } else if (route.name === 'Drinks') {
-              iconName = focused ? 'beer' : 'beer-outline';
-            } else if (route.name === 'About') {
-              iconName = focused ? 'information-circle' : 'information-circle-outline';
+            } else if (route.name === 'Sport') {
+              iconName = focused ? 'basketball' : 'basketball-outline'; // Sporticoon
+            } else if (route.name === 'Favorites') {
+              iconName = focused ? 'star' : 'star-outline'; // Icoon voor Favorites
+            } else if (route.name === 'Settings') {
+              iconName = focused ? 'settings' : 'settings-outline'; // Instellingenicoon
             }
 
             return <Icon name={iconName} size={size} color={color} />;
           },
-          tabBarActiveTintColor: '#E52529',
+          tabBarActiveTintColor: '#062B65',
           tabBarInactiveTintColor: 'gray',
           tabBarStyle: {
             height: 70,
-            paddingBottom: 10, // Adjust the paddingBottom to add padding to the bottom
-          },
-          screenOptions: {
-            cardStyle: { backgroundColor: '#FF0000' }, // Red
+            paddingBottom: 10, // Pas de paddingBottom aan om ruimte onderaan toe te voegen
           },
         })}
       >
-        <Tab.Screen name="Home" component={HomeScreen} 
-         options={{ title: 'Home', headerStyle: { backgroundColor: '#E52529' }, headerTitleStyle: { color: 'white' } }}/>
-        <Tab.Screen name="Drinks" component={DrinksScreen} 
-        options={{ title: 'Drinks', headerStyle: { backgroundColor: '#E52529' }, headerTitleStyle: { color: 'white' } }}/>
-        <Tab.Screen name="About" component={AboutScreen} 
-        options={{ title: 'About', headerStyle: { backgroundColor: '#E52529' }, headerTitleStyle: { color: 'white' } }}/>
+        <Tab.Screen 
+          name="Home" 
+          component={() => <StackNavigator route={{ params: { component: HomeScreen }}} />}
+          options={{ headerShown: false }} // Verberg de tab titel
+        />
+        <Tab.Screen 
+          name="Sport" 
+          component={() => <StackNavigator route={{ params: { component: SportScreen }}} />}
+          options={{ headerShown: false }} // Verberg de tab titel
+        />
+        <Tab.Screen 
+          name="Favorites" 
+          component={() => <StackNavigator route={{ params: { component: FavoritesScreen }}} />}
+          options={{ headerShown: false }} // Verberg de tab titel
+        />
+        <Tab.Screen 
+          name="Settings" 
+          component={() => <StackNavigator route={{ params: { component: SettingsScreen }}} />}
+          options={{ headerShown: false }} // Verberg de tab titel
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
