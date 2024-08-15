@@ -1,3 +1,4 @@
+// sport
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Platform } from 'react-native';
 import Footer from '../components/Footer'; // Import the Footer component
